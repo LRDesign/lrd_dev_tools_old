@@ -1,15 +1,8 @@
-%h1 New <%= singular_name %>
+- set_headline New <%= singular_name %>
 
-- form_for(@<%= singular_name %>) do |f|
-  = f.error_messages
+= link_to 'Show', @<%= singular_name %>
+|
+= link_to 'Back to List', <%= plural_name %>_path
 
-  <%- for attribute in attributes do -%>
-  %p
-    = f.label :<%= attribute.name %>
-    %br
-    = f.<%= attribute.field_type %> :<%= attribute.name %>
-  <%- end -%>
+= render :partial => "form"
 
-  %p= f.submit "Create"
-
-= link_to 'Back', <%= plural_name %>_path

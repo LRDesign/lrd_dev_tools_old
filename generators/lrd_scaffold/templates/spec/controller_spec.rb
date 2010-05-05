@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../spec_helper')
+require 'spec_helper'
 
 describe <%= controller_class_name %>Controller do
 
@@ -6,174 +6,194 @@ describe <%= controller_class_name %>Controller do
     @<%= file_name %> = Factory(:<%= singular_name %>)
   end
 
-  describe "responding to GET index" do
-
+  ########################################################################################
+  #                                      GET INDEX
+  ########################################################################################
+  describe "GET index" do
     it "should expose all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
       get :index
       assigns[:<%= table_name %>].should == [@<%= file_name %>]
     end
-
-    describe "with mime type of xml" do
-  
-      it "should render all <%= table_name.pluralize %> as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        <%= class_name %>.should_receive(:find).with(:all).and_return(<%= file_name.pluralize %> = mock("Array of <%= class_name.pluralize %>"))
-        <%= file_name.pluralize %>.should_receive(:to_xml).and_return("generated XML")
-        get :index
-        response.body.should == "generated XML"
-      end
-    
-    end
-
   end
 
+  ########################################################################################
+  #                                      GET SHOW
+  ########################################################################################
   describe "responding to GET show" do
-
     it "should expose the requested <%= file_name %> as @<%= file_name %>" do
       get :show, :id => @<%= file_name %>.id
       assigns[:<%= file_name %>].should == @<%= file_name %>
-    end
-    
-    describe "with mime type of xml" do
-
-      it "should render the requested <%= file_name %> as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        <%= class_name %>.should_receive(:find).with("37").and_return(@<%= file_name %>)
-        @<%= file_name %>.should_receive(:to_xml).and_return("generated XML")
-        get :show, :id => "37"
-        response.body.should == "generated XML"
-      end
-
-    end
-    
+    end  
   end
 
-  describe "responding to GET new" do
-  
+  ########################################################################################
+  #                                      GET NEW
+  ########################################################################################
+  describe "responding to GET new" do  
     it "should expose a new <%= file_name %> as @<%= file_name %>" do
-      <%= file_name %> = Factory.build(:<%= singular_name %>)
-      <%= class_name %>.should_receive(:new).and_return(<%= file_name %>)
       get :new
-      assigns[:<%= file_name %>].should equal(<%= file_name %>)
+      assigns[:<%= file_name %>].should be_a(controller_class_name)
+      assigns[:<%= file_name %>].should be_new_record
     end
-
   end
 
-  describe "responding to GET edit" do
-  
+  ########################################################################################
+  #                                      GET EDIT
+  ########################################################################################
+  describe "responding to GET edit" do  
     it "should expose the requested <%= file_name %> as @<%= file_name %>" do
       get :edit, :id => @<%= file_name %>.id
       assigns[:<%= file_name %>].should == @<%= file_name %>
     end
-
   end
 
+  ########################################################################################
+  #                                      POST CREATE
+  ########################################################################################
   describe "responding to POST create" do
 
-    before(:each) do
-      @new_<%= file_name %> = Factory.build(:<%= singular_name %>)
-    end
-
     describe "with valid params" do
+      def valid_create_params
+        {} # TODO: define valid params for <%= controller_class_name %>
+      end
+      
+      it "should create a new <%= file_name %> in the database"
+        pending "need definition of valid_create_params"
+        lambda do 
+          post :create, :<%= file_name %> => valid_create_params
+        end.should change(<%= controller_class_name %>, :count).by(1)
+      end
 
-      it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
-        <%= class_name %>.should_receive(:new).with({'these' => 'params'}).and_return(@new_<%= file_name %>)
-        post :create, :<%= file_name %> => {:these => 'params'}
-        assigns(:<%= file_name %>).should equal(@new_<%= file_name %>)
+      it "should expose a saved <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of valid_create_params"
+        post :create, :<%= file_name %> => valid_create_params
+        assigns[:<%= file_name %>].should be_a(controller_class_name)
+      end
+      
+      it "should save the newly created <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of valid_create_params"
+        post :create, :<%= file_name %> => valid_create_params
+        assigns[:<%= file_name %>].should_not be_new_record
       end
 
       it "should redirect to the created <%= file_name %>" do
-        <%= class_name %>.stub!(:new).and_return(@new_<%= file_name %>)
-        post :create, :<%= file_name %> => {}
+        pending "need definition of valid_create_params"
+        post :create, :<%= file_name %> => valid_create_params
         response.should redirect_to(<%= table_name.singularize %>_url(@new_<%= file_name %>))
-      end
-      
+      end      
     end
     
     describe "with invalid params" do
-
-      before(:each) do
-        @new_<%= file_name %>.stub!(:save => false)
-      end
-
-      it "should expose a newly created but unsaved <%= file_name %> as @<%= file_name %>" do
-        <%= class_name %>.stub!(:new).with({'these' => 'params'}).and_return(@new_<%= file_name %>)
-        post :create, :<%= file_name %> => {:these => 'params'}
-        assigns(:<%= file_name %>).should equal(@new_<%= file_name %>)
-      end
-
-      it "should re-render the 'new' template" do
-        <%= class_name %>.stub!(:new).and_return(@new_<%= file_name %>)
-        post :create, :<%= file_name %> => {}
-        response.should render_template('new')
+      def invalid_create_params
+        {} # TODO: define invalid params for <%= controller_class_name %>
+        # The invalid params should be any set of params that will fail 
+        # validation for this model.
       end
       
-    end
-    
+      it "should not create a new <%= file_name %> in the database"
+        pending "need definition of invalid_create_params"
+        lambda do 
+          post :create, :<%= file_name %> => invalid_create_params
+        end.should_not change(<%= controller_class_name %>, :count)
+      end      
+      
+      it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of invalid_create_params"
+        post :create, :<%= file_name %> => invalid_create_params
+        assigns(:<%= file_name %>).should be_a(<%= controller_class_name %>)
+      end
+      
+      it "should expose an unsaved <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of invalid_create_params"
+        post :create, :<%= file_name %> => invalid_create_params
+        assigns(:<%= file_name %>).should be_new_record
+      end
+      
+      it "should re-render the 'new' template" do
+        pending "need definition of invalid_create_params"
+        post :create, :<%= file_name %> => invalid_create_params
+        response.should render_template('new')
+      end      
+    end    
   end
 
+  ########################################################################################
+  #                                      PUT UPDATE
+  ########################################################################################
   describe "responding to PUT update" do
 
-    before(:each) do
-      <%= class_name %>.should_receive(:find).with(@<%= file_name%>.id.to_s).and_return(@<%= file_name %>)
-    end
-
-    it "should update the requested <%= file_name %>" do
-      @<%= file_name %>.should_receive(:update_attributes).with({'these' => 'params'})
-      put :update, :id => @<%= file_name %>.id, :<%= file_name %> => {:these => 'params'}
-    end
-
     describe "with valid params" do
-
-      before(:each) do
-        @<%= file_name %>.stub!(:update_attributes => true)
+      def valid_update_params 
+        {} # TODO: Define valid params for update
+      end
+      
+      it "should update the requested <%= file_name %> in the database"          
+        pending "need definition of valid_update_params"
+        lambda do
+          put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
+        end.should_change{ @<%= file_name %>.reload }
       end
 
       it "should expose the requested <%= file_name %> as @<%= file_name %>" do
-        put :update, :id => @<%= file_name %>.id
-        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+        pending "need definition of valid_update_params"
+        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
+        assigns(:<%= file_name %>).should == @<%= file_name %>
       end
 
       it "should redirect to the <%= file_name %>" do
-        put :update, :id => @<%= file_name %>.id
+        pending "need definition of valid_update_params"
+        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
         response.should redirect_to(<%= table_name.singularize %>_url(@<%= file_name %>))
       end
-
     end
     
     describe "with invalid params" do
-
-      before(:each) do
-        @<%= file_name %>.stub!(:update_attributes => false)
+      def invalid_update_params 
+        {} # TODO: Define invalid params for update
+      end
+      
+      it "should not change the <%= file_name %> in the database" do
+        pending "need definition of invalid_update_params"
+        lambda do 
+          put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
+        end.should_not change{ @<%= file_name %>.reload }
       end
 
       it "should expose the <%= file_name %> as @<%= file_name %>" do
-        put :update, :id => @<%= file_name %>.id
+        pending "need definition of invalid_update_params"      
+        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
         assigns(:<%= file_name %>).should equal(@<%= file_name %>)
       end
 
       it "should re-render the 'edit' template" do
-        put :update, :id => @<%= file_name %>.id
+        pending "need definition of invalid_update_params"      
+        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
         response.should render_template('edit')
       end
-
     end
-
   end
 
-  describe "responding to DELETE destroy" do
 
-    it "should destroy the requested <%= file_name %>" do
-      <%= class_name %>.should_receive(:find).with(@<%= file_name %>.id.to_s).and_return(@<%= file_name %>)
-      @<%= file_name %>.should_receive(:destroy)
+  ########################################################################################
+  #                                      DELETE DESTROY
+  ########################################################################################
+  describe "DELETE destroy" do
+
+    it "should reduce <%= file_name %> count by one" do
+      lambda do
+        delete :destroy, :id => @<= file_name %>.id
+      end.should change(Project, :count).by(-1)
+    end
+    
+    it "should make the <%= table_name %> unfindable in the database" do    
       delete :destroy, :id => @<%= file_name %>.id
+      lambda{ Project.find(@<%= table_name %>.id)}.should raise_error(ActiveRecord::RecordNotFound)      
     end
   
     it "should redirect to the <%= table_name %> list" do
       delete :destroy, :id => @<%= file_name %>.id
       response.should redirect_to(<%= table_name %>_url)
     end
-
   end
 
 end
