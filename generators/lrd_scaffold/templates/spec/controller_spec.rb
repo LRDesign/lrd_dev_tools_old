@@ -32,7 +32,7 @@ describe <%= controller_class_name %>Controller do
   describe "responding to GET new" do  
     it "should expose a new <%= file_name %> as @<%= file_name %>" do
       get :new
-      assigns[:<%= file_name %>].should be_a(controller_class_name)
+      assigns[:<%= file_name %>].should be_a(<%= class_name %>)
       assigns[:<%= file_name %>].should be_new_record
     end
   end
@@ -54,7 +54,7 @@ describe <%= controller_class_name %>Controller do
 
     describe "with valid params" do
       def valid_create_params
-        {} # TODO: define valid params for <%= controller_class_name %>
+        {} # TODO: define valid params for <%= controller_singular_name %>
       end
       
       it "should create a new <%= file_name %> in the database" do
@@ -67,7 +67,7 @@ describe <%= controller_class_name %>Controller do
       it "should expose a saved <%= file_name %> as @<%= file_name %>" do
         pending "need definition of valid_create_params"
         post :create, :<%= file_name %> => valid_create_params
-        assigns[:<%= file_name %>].should be_a(controller_class_name)
+        assigns[:<%= file_name %>].should be_a(<%= class_name %>)
       end
       
       it "should save the newly created <%= file_name %> as @<%= file_name %>" do
@@ -87,7 +87,7 @@ describe <%= controller_class_name %>Controller do
       def invalid_create_params
         {} # TODO: define invalid params for <%= controller_class_name %>
         # The invalid params should be any set of params that will fail 
-        # validation for this model.
+        # validation for a <%= controller_singular_name %>.
       end
       
       it "should not create a new <%= file_name %> in the database" do
@@ -150,6 +150,8 @@ describe <%= controller_class_name %>Controller do
     describe "with invalid params" do
       def invalid_update_params 
         {} # TODO: Define invalid params for update
+        # the invalid params hash should include an attribute that will fail validation
+        # for a <%= controller_singular_name %>.
       end
       
       it "should not change the <%= file_name %> in the database" do

@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../rspec_default_values'
+require 'ruby-debug'
 
 class LrdScaffoldGenerator < Rails::Generator::NamedBase
   default_options :skip_migration => false
@@ -80,6 +81,9 @@ class LrdScaffoldGenerator < Rails::Generator::NamedBase
           File.join('app/views', controller_class_path, controller_file_name, "#{action}.#{view_file_extension}")
         )
       end
+      m.template "lrd_scaffold:views/_form.#{@view_file_extension}",
+         File.join('app/views', controller_class_path, controller_file_name, "_form.#{view_file_extension}")
+        
       
       # Model class, unit test
       m.template 'model:model.rb',      File.join('app/models', class_path, "#{file_name}.rb")

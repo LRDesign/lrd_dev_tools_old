@@ -5,7 +5,7 @@
   <%- if attribute.field_type == 'text_field' -%>
   = labeled_input f, :<%= attribute.name %>
   <%- else -%>
-  = labeled_input f, :<%= attribute.name %>, :input => f.<%= attribute.field_type %>
+  = labeled_input f, :<%= attribute.name %>, :input => f.<%= attribute.field_type %>(<%= attribute.name %>)
   <%- end -%>
   <%- end -%>
   = unlabeled_submit f
