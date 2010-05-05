@@ -57,7 +57,7 @@ describe <%= controller_class_name %>Controller do
         {} # TODO: define valid params for <%= controller_class_name %>
       end
       
-      it "should create a new <%= file_name %> in the database"
+      it "should create a new <%= file_name %> in the database" do
         pending "need definition of valid_create_params"
         lambda do 
           post :create, :<%= file_name %> => valid_create_params
@@ -90,7 +90,7 @@ describe <%= controller_class_name %>Controller do
         # validation for this model.
       end
       
-      it "should not create a new <%= file_name %> in the database"
+      it "should not create a new <%= file_name %> in the database" do
         pending "need definition of invalid_create_params"
         lambda do 
           post :create, :<%= file_name %> => invalid_create_params
@@ -127,7 +127,7 @@ describe <%= controller_class_name %>Controller do
         {} # TODO: Define valid params for update
       end
       
-      it "should update the requested <%= file_name %> in the database"          
+      it "should update the requested <%= file_name %> in the database" do          
         pending "need definition of valid_update_params"
         lambda do
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
@@ -181,7 +181,7 @@ describe <%= controller_class_name %>Controller do
 
     it "should reduce <%= file_name %> count by one" do
       lambda do
-        delete :destroy, :id => @<= file_name %>.id
+        delete :destroy, :id => @<%= file_name %>.id
       end.should change(Project, :count).by(-1)
     end
     

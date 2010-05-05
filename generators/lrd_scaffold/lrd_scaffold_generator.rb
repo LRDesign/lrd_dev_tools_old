@@ -12,7 +12,7 @@ class LrdScaffoldGenerator < Rails::Generator::NamedBase
                 :controller_singular_name,
                 :controller_plural_name,
                 :resource_edit_path,
-                :default_file_extension
+                :view_file_extension
   alias_method  :controller_file_name,  :controller_singular_name
   alias_method  :controller_table_name, :controller_plural_name
 
@@ -31,7 +31,7 @@ class LrdScaffoldGenerator < Rails::Generator::NamedBase
     end
     
     @resource_generator = "scaffold"
-    @default_file_extension = "html"
+    @view_file_extension = "html.haml"
     
     if ActionController::Base.respond_to?(:resource_action_separator)
       @resource_edit_path = "/edit"
@@ -76,8 +76,8 @@ class LrdScaffoldGenerator < Rails::Generator::NamedBase
 
       for action in scaffold_views
         m.template(
-          "lrd_scaffold:views/#{action}.#{@default_file_extension}",
-          File.join('app/views', controller_class_path, controller_file_name, "#{action}.#{default_file_extension}")
+          "lrd_scaffold:views/#{action}.#{@view_file_extension}",
+          File.join('app/views', controller_class_path, controller_file_name, "#{action}.#{view_file_extension}")
         )
       end
       
@@ -87,14 +87,14 @@ class LrdScaffoldGenerator < Rails::Generator::NamedBase
       m.template 'rspec_model:model_spec.rb',       File.join('spec/models', class_path, "#{file_name}_spec.rb")
 
       # View specs
-      m.template "lrd_scaffold:spec/edit_haml_spec.rb",
-        File.join('spec/views', controller_class_path, controller_file_name, "edit.#{default_file_extension}_spec.rb")
-      m.template "lrd_scaffold:spec/index_haml_spec.rb",
-        File.join('spec/views', controller_class_path, controller_file_name, "index.#{default_file_extension}_spec.rb")
-      m.template "lrd_scaffold:spec/new_haml_spec.rb",
-        File.join('spec/views', controller_class_path, controller_file_name, "new.#{default_file_extension}_spec.rb")
-      m.template "lrd_scaffold:spec/show_haml_spec.rb",
-        File.join('spec/views', controller_class_path, controller_file_name, "show.#{default_file_extension}_spec.rb")
+      m.template "lrd_scaffold:spec/edit.html_spec.rb",
+        File.join('spec/views', controller_class_path, controller_file_name, "edit.html_spec.rb")
+      m.template "lrd_scaffold:spec/index.html_spec.rb",
+        File.join('spec/views', controller_class_path, controller_file_name, "index.html_spec.rb")
+      m.template "lrd_scaffold:spec/new.html_spec.rb",
+        File.join('spec/views', controller_class_path, controller_file_name, "new.html_spec.rb")
+      m.template "lrd_scaffold:spec/show.html_spec.rb",
+        File.join('spec/views', controller_class_path, controller_file_name, "show.html_spec.rb")
 
       unless options[:skip_migration]
         m.migration_template(
