@@ -189,7 +189,7 @@ describe <%= controller_class_name %>Controller do
     
     it "should make the <%= table_name %> unfindable in the database" do    
       delete :destroy, :id => @<%= file_name %>.id
-      lambda{ Project.find(@<%= singular_name %>.id)}.should raise_error(ActiveRecord::RecordNotFound)      
+      lambda{ <%= class_name %>.find(@<%= singular_name %>.id)}.should raise_error(ActiveRecord::RecordNotFound)      
     end
   
     it "should redirect to the <%= table_name %> list" do
