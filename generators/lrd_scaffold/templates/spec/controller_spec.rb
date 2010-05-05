@@ -61,7 +61,7 @@ describe <%= controller_class_name %>Controller do
         pending "need definition of valid_create_params"
         lambda do 
           post :create, :<%= file_name %> => valid_create_params
-        end.should change(<%= controller_class_name %>, :count).by(1)
+        end.should change(<%= class_name %>, :count).by(1)
       end
 
       it "should expose a saved <%= file_name %> as @<%= file_name %>" do
@@ -94,7 +94,7 @@ describe <%= controller_class_name %>Controller do
         pending "need definition of invalid_create_params"
         lambda do 
           post :create, :<%= file_name %> => invalid_create_params
-        end.should_not change(<%= controller_class_name %>, :count)
+        end.should_not change(<%= class_name %>, :count)
       end      
       
       it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
@@ -184,12 +184,12 @@ describe <%= controller_class_name %>Controller do
     it "should reduce <%= file_name %> count by one" do
       lambda do
         delete :destroy, :id => @<%= file_name %>.id
-      end.should change(Project, :count).by(-1)
+      end.should change(<%= class_name %>, :count).by(-1)
     end
     
     it "should make the <%= table_name %> unfindable in the database" do    
       delete :destroy, :id => @<%= file_name %>.id
-      lambda{ Project.find(@<%= table_name %>.id)}.should raise_error(ActiveRecord::RecordNotFound)      
+      lambda{ Project.find(@<%= singular_name %>.id)}.should raise_error(ActiveRecord::RecordNotFound)      
     end
   
     it "should redirect to the <%= table_name %> list" do
