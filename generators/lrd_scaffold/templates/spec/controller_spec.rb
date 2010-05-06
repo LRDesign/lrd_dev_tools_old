@@ -100,7 +100,7 @@ describe <%= controller_class_name %>Controller do
       it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
         pending "need definition of invalid_create_params"
         post :create, :<%= file_name %> => invalid_create_params
-        assigns(:<%= file_name %>).should be_a(<%= controller_class_name %>)
+        assigns(:<%= file_name %>).should be_a(<%= class_name %>)
       end
       
       it "should expose an unsaved <%= file_name %> as @<%= file_name %>" do
@@ -131,7 +131,7 @@ describe <%= controller_class_name %>Controller do
         pending "need definition of valid_update_params"
         lambda do
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
-        end.should_change{ @<%= file_name %>.reload }
+        end.should change{ @<%= file_name %>.reload }
       end
 
       it "should expose the requested <%= file_name %> as @<%= file_name %>" do
@@ -164,7 +164,7 @@ describe <%= controller_class_name %>Controller do
       it "should expose the <%= file_name %> as @<%= file_name %>" do
         pending "need definition of invalid_update_params"      
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
-        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+        assigns(:<%= file_name %>).should == @<%= file_name %>
       end
 
       it "should re-render the 'edit' template" do
