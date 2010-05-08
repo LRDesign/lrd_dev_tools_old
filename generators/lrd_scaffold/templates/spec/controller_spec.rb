@@ -96,7 +96,12 @@ describe <%= controller_class_name %>Controller do
       end      
       
       it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
+<<<<<<< HEAD
         post :create, :<%= file_name %> => @invalid_create_params
+=======
+        pending "need definition of invalid_create_params"
+        post :create, :<%= file_name %> => invalid_create_params
+>>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
         assigns(:<%= file_name %>).should be_a(<%= class_name %>)
       end
       
@@ -126,8 +131,13 @@ describe <%= controller_class_name %>Controller do
       
       it "should update the requested <%= file_name %> in the database" do          
         lambda do
+<<<<<<< HEAD
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @valid_update_params
         end.should_change{ @<%= file_name %>.reload }
+=======
+          put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
+        end.should change{ @<%= file_name %>.reload }
+>>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
       end
 
       it "should expose the requested <%= file_name %> as @<%= file_name %>" do
@@ -156,8 +166,13 @@ describe <%= controller_class_name %>Controller do
 
       it "should expose the <%= file_name %> as @<%= file_name %>" do
         pending "need definition of invalid_update_params"      
+<<<<<<< HEAD
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @invalid_update_params
         assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+=======
+        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
+        assigns(:<%= file_name %>).should == @<%= file_name %>
+>>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
       end
 
       it "should re-render the 'edit' template" do
