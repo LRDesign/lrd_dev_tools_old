@@ -54,28 +54,31 @@ describe <%= controller_class_name %>Controller do
 
     describe "with valid params" do
       before do
-        pending "need definition of valid_create_params"
         @valid_create_params = {
         } # TODO: define valid params for <%= controller_singular_name %>
       end
       
       it "should create a new <%= file_name %> in the database" do
+        pending "need definition of valid_create_params"
         lambda do 
           post :create, :<%= file_name %> => @valid_create_params
         end.should change(<%= class_name %>, :count).by(1)
       end
 
       it "should expose a saved <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of valid_create_params"
         post :create, :<%= file_name %> => @valid_create_params
         assigns[:<%= file_name %>].should be_a(<%= class_name %>)
       end
       
       it "should save the newly created <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of valid_create_params"
         post :create, :<%= file_name %> => @valid_create_params
         assigns[:<%= file_name %>].should_not be_new_record
       end
 
       it "should redirect to the created <%= file_name %>" do
+        pending "need definition of valid_create_params"
         post :create, :<%= file_name %> => @valid_create_params
         new_<%= file_name %> = assigns[:<%= file_name %>]
         response.should redirect_to(<%= table_name.singularize %>_url(new_<%= file_name %>))
@@ -83,34 +86,32 @@ describe <%= controller_class_name %>Controller do
     end
     
     describe "with invalid params" do
-      pending "need definition of invalid_create_params"
       before do
         @invalid_create_params = {
         } 
       end
       
       it "should not create a new <%= file_name %> in the database" do
+        pending "need definition of invalid_create_params"
         lambda do 
           post :create, :<%= file_name %> => @invalid_create_params
         end.should_not change(<%= class_name %>, :count)
       end      
       
       it "should expose a newly created <%= file_name %> as @<%= file_name %>" do
-<<<<<<< HEAD
-        post :create, :<%= file_name %> => @invalid_create_params
-=======
         pending "need definition of invalid_create_params"
-        post :create, :<%= file_name %> => invalid_create_params
->>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
+        post :create, :<%= file_name %> => @invalid_create_params
         assigns(:<%= file_name %>).should be_a(<%= class_name %>)
       end
       
       it "should expose an unsaved <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of invalid_create_params"
         post :create, :<%= file_name %> => @invalid_create_params
         assigns(:<%= file_name %>).should be_new_record
       end
       
       it "should re-render the 'new' template" do
+        pending "need definition of invalid_create_params"
         post :create, :<%= file_name %> => @invalid_create_params
         response.should render_template('new')
       end      
@@ -124,41 +125,38 @@ describe <%= controller_class_name %>Controller do
 
     describe "with valid params" do
       before do
-        pending "need definition of valid_update_params"
         @valid_update_params = {
         } # TODO: Define valid params for update
       end
       
       it "should update the requested <%= file_name %> in the database" do          
+        pending "need definition of valid_update_params"
         lambda do
-<<<<<<< HEAD
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @valid_update_params
         end.should_change{ @<%= file_name %>.reload }
-=======
-          put :update, :id => @<%= file_name %>.id, :<%= file_name %> => valid_update_params
-        end.should change{ @<%= file_name %>.reload }
->>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
       end
 
       it "should expose the requested <%= file_name %> as @<%= file_name %>" do
+        pending "need definition of valid_update_params"
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @valid_update_params
         assigns(:<%= file_name %>).should == @<%= file_name %>
       end
 
       it "should redirect to the <%= file_name %>" do
+        pending "need definition of valid_update_params"
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @valid_update_params
         response.should redirect_to(<%= table_name.singularize %>_url(@<%= file_name %>))
       end
     end
     
     describe "with invalid params" do
-      pending "need definition of invalid_update_params"
       before do
         @invalid_update_params = {
         } 
       end
       
       it "should not change the <%= file_name %> in the database" do
+        pending "need definition of invalid_update_params"
         lambda do 
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @invalid_update_params
         end.should_not change{ @<%= file_name %>.reload }
@@ -166,13 +164,8 @@ describe <%= controller_class_name %>Controller do
 
       it "should expose the <%= file_name %> as @<%= file_name %>" do
         pending "need definition of invalid_update_params"      
-<<<<<<< HEAD
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @invalid_update_params
         assigns(:<%= file_name %>).should equal(@<%= file_name %>)
-=======
-        put :update, :id => @<%= file_name %>.id, :<%= file_name %> => invalid_update_params
-        assigns(:<%= file_name %>).should == @<%= file_name %>
->>>>>>> 32461cf8ac34992281e6d7e42279393978658a30
       end
 
       it "should re-render the 'edit' template" do
