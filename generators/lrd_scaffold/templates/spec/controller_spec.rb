@@ -165,7 +165,7 @@ describe <%= controller_class_name %>Controller do
       it "should expose the <%= file_name %> as @<%= file_name %>" do
         pending "need definition of invalid_update_params"      
         put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @invalid_update_params
-        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+        assigns(:<%= file_name %>).should == @<%= file_name %>
       end
 
       it "should re-render the 'edit' template" do
