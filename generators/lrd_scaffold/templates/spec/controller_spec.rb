@@ -133,7 +133,7 @@ describe <%= controller_class_name %>Controller do
         pending "need definition of valid_update_params"
         lambda do
           put :update, :id => @<%= file_name %>.id, :<%= file_name %> => @valid_update_params
-        end.should_change{ @<%= file_name %>.reload }
+        end.should change{ @<%= file_name %>.reload }
       end
 
       it "should expose the requested <%= file_name %> as @<%= file_name %>" do
