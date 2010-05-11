@@ -18,7 +18,9 @@ gem 'haml'
 gem 'authlogic'
 gem 'newrelic_rpm', :env => "development"
 gem 'hoptoad_notifier'
-gem 'will_paginate'
+gem 'will_paginate'  
+gem 'rspec', :env => "test"
+gem 'rspec-rails', :env => "test"
 rake 'gems:install', :sudo => true 
 
 #Until this goes to live in a developer's gem
@@ -40,9 +42,11 @@ plugin "factory_haml_rspec_scaffold", :git => "git://github.com/morhekil/factory
 plugin "rails_xss", :git => "git://github.com/dhh/rails_xss.git", :submodule => :yes
 
 generate :logical_authz_models, "-u", user
-generate :session, user_session
+generate :session, user_session  
+generate :rspec
 
 lib "authenticated_system.rb" { file_contents "authenticated_system.rb" } 
+file "spec/support/authlogic_test_helper.rb" { file_contents "authlogic_test_helper.rb" }
 
 plugin "query_reviewer", :git => "git://github.com/dsboulder/query_reviewer.git", :submodule => :yes
 plugin "human-attribute-with-labels", :git => "git://github.com/hgtesta/human-attribute-with-labels.git", :submodule => :yes
